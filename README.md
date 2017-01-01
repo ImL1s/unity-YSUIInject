@@ -7,27 +7,75 @@
 
 <b>使用特性(Attribute)的方式注入</b>
 
-	[ViewInject("./btn")]
-	public Button test0Button;
+	using System;
+	using System.Collections;
+	using UnityEngine;
+	using UnityEngine.UI;
+	using YSFramework;
 
-	[ViewInject("Canvas/Panel/btn")]
-	public Button test1Button
+	public class TestInjectPanel :MonoBehaviour
 	{
-		get;
-		set;
+
+		[ViewInject("./btn")]
+		public Button test0Button;
+	
+		[ViewInject("Canvas/Panel/btn")]
+		public Button test1Button
+		{
+			get;
+			set;
+		}
+	
+		public Button test2Button
+		{
+			get;
+			set;
+		}
+	
+		[ViewInject("Canvas/Panel/btn")]
+		public Button test3Button;
+	
+		[ViewInject("./Img")]
+		public Image test0Image;
+	
+	
+		void Awake()
+		{
+			InjectManager.Inject (this);
+	
+			print ("Button:" + test0Button);
+			print ("Button:" + test1Button);
+			print ("Button:" + test2Button);
+			print ("Button:" + test3Button);
+			print ("Button:" + test0Image);
+		}
 	}
 
-	public Button test2Button
-	{
-		get;
-		set;
-	}
+輸出結果為:
 
-	[ViewInject("Canvas/Panel/btn")]
-	public Button test3Button;
+	Button:btn (UnityEngine.UI.Button)
+	UnityEngine.MonoBehaviour:print(Object)
+	
+	Button:btn (UnityEngine.UI.Button)
+	UnityEngine.MonoBehaviour:print(Object)
+	
+	Button:
+	UnityEngine.MonoBehaviour:print(Object)
+	
+	Button:btn (UnityEngine.UI.Button)
+	UnityEngine.MonoBehaviour:print(Object)
+	
+	Button:Img (UnityEngine.UI.Image)
+	UnityEngine.MonoBehaviour:print(Object)
+	
 
-	[ViewInject("./Img")]
-	public Image test0Image;
+
+
+
+
+
+	
+
 
 
 
